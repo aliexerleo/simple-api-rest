@@ -8,14 +8,15 @@ app = Flask(__name__)
 @app.route('/add', methods=['POST'])
 def add_movies():
 
+    id = request.json['id']
     title = request.json['title']
     premiere = request.json['premiere']
     country = request.json['country']
 
-    data = (title, premiere, country)
-
+    data = (id, title, premiere, country)
     new_movies = query.add_movies(data)
-    if new_movies == 0:
+    print(new_movies)
+    if new_movies != False:
         return jsonify({'message': 'new movies insert {0}'.format(title)})
     return jsonify({'message': 'Error in insert'})
 

@@ -6,13 +6,13 @@ from .connection import create_connection
 def add_movies(data):
     conn = create_connection()
 
-    sql = """INSERT INTO movies(title, premiere, country) VALUES (%s, %s, %s)"""
+    sql = """INSERT INTO movies(id, title, premiere, country) VALUES (%s, %s, %s, %s)"""
 
     try:
         cur = conn.cursor()
         cur.execute(sql, data)
         conn.commit()
-        return cur.lastrowid
+        return True
 
     except Error as e:
         print(f'Error at add_movies : {str(e)}')
